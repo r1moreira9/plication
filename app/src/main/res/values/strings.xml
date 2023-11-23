@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">plication</string>
+    <string name="login">Login: </string>
+    <string name="Id">ID: </string>
+    <string name="name">Nome: </string>
+    <string name="nodeId">Node Id:</string>
+</resources>
