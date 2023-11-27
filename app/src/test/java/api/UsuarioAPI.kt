@@ -14,10 +14,10 @@ interface UsuarioAPI {
             .baseUrl("https://api.github.com/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-        val service = retrofit.create(UsuarioAPI::class.java)
+        val UsuarioAPI = retrofit.create(UsuarioAPI::class.java)
 
         fun getInstance(): UsuarioAPI{
-            return  service
+            return  UsuarioAPI
 
         }
     }
