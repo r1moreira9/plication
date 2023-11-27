@@ -12,7 +12,8 @@ import com.r1moreira9.plication.databinding.ActivityMain2Binding
 class Adptaer (private val onItemClicked: (UsersApi)-> Unit) : RecyclerView.Adapter<MainViewHolder>() {
     private var users = mutableListOf<UsersApi>()
     fun setUsersList(users: List<UsersApi>){
-        this.users = users<UsersApi>()
+        this.users = users.toMutableList()
+        notifyDataSetChanged()
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -26,15 +27,15 @@ class Adptaer (private val onItemClicked: (UsersApi)-> Unit) : RecyclerView.Adap
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
         val users = users [position]
-        holder.lista(users, onItemClicked)
+        holder.listar(users, onItemClicked)
     }
 }
 // Passando informações a Activiti e passando métodos de como tratar e receber as imagens.
 class MainViewHolder (val binding: ActivityMain2Binding) : RecyclerView.ViewHolder(binding.root){
 
-fun lista(users:UsersApi, onItemClicked: (UsersApi) -> Unit) {
-    binding.txtLogin.text = UsersApi
-    binding.txtId.text = UsersApi
+fun listar(users:UsersApi, onItemClicked: (UsersApi) -> Unit) {
+    binding.txtLogin.text = users.login
+    binding.txtId.text = users.id
 
     val requestOptions = RequestOptions()
         .placeholder(R.drawable.ic_launcher_background)
@@ -42,7 +43,7 @@ fun lista(users:UsersApi, onItemClicked: (UsersApi) -> Unit) {
 
     Glide.with(itemView.context)
         .applyDefaultRequestOptions(requestOptions)
-        .load()
+        .load(users.avatar)
         .into(binding.perfil)
 
 }
