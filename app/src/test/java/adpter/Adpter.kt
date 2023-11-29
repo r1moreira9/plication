@@ -30,7 +30,7 @@ class Adptaer (private val onItemClicked: (UsersApi)-> Unit) : RecyclerView.Adap
         holder.listar(users, onItemClicked)
     }
 }
-// Passando informações a Activiti e passando métodos de como tratar e receber as imagens.
+// Passando informações para Activiti e passando métodos de como tratar e receber as imagens.
 class MainViewHolder (val binding: ActivityMain2Binding) : RecyclerView.ViewHolder(binding.root){
 
 fun listar(users:UsersApi, onItemClicked: (UsersApi) -> Unit) {
@@ -46,6 +46,9 @@ fun listar(users:UsersApi, onItemClicked: (UsersApi) -> Unit) {
         .load(users.avatar)
         .into(binding.perfil)
 
+        itemView.setOnClickListener{
+            onItemClicked(users)
+        }
 }
 
 }

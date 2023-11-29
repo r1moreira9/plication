@@ -1,5 +1,7 @@
 package api
 
+import UsersApi
+import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
@@ -7,17 +9,18 @@ import retrofit2.http.GET
 interface UsuarioAPI {
 
     @GET("users")
-    suspend fun listarUsuario()
+     fun getAllUsers(): Call<List<UsersApi>>
     companion object{
+        private val usuarioAPI: UsuarioAPI by lazy {
 
-        val retrofit = Retrofit.Builder()
+     val retrofit = Retrofit.Builder()
             .baseUrl("https://api.github.com/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-        val UsuarioAPI = retrofit.create(UsuarioAPI::class.java)
-
+        retrofit.create(UsuarioAPI::class.java)
+        }
         fun getInstance(): UsuarioAPI{
-            return  UsuarioAPI
+            return  usuarioAPI
 
         }
     }
